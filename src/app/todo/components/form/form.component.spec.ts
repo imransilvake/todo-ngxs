@@ -1,5 +1,5 @@
 // angular
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -9,6 +9,9 @@ import { TodoState } from 'src/app/todo/store/states/todo.state';
 import { FormComponent } from './form.component';
 
 describe('Form Component', () => {
+    let component: FormComponent;
+    let fixture: ComponentFixture<FormComponent>;
+    
     beforeEach(async() => {
         TestBed.configureTestingModule({
             imports: [
@@ -24,28 +27,32 @@ describe('Form Component', () => {
         }).compileComponents();
     });
 
-    it('should have form invalid', () => {
-        const fixture = TestBed.createComponent(FormComponent);
-        const form = fixture.componentInstance;
-        fixture.detectChanges();
+    beforeEach(() => {
+		fixture = TestBed.createComponent(FormComponent);
+		component = fixture.componentInstance;
 
+		fixture.detectChanges();
+	});
+
+	it('should have Form Component', () => {
+		expect(component).toBeDefined();
+	});
+
+    it('should have form invalid', () => {
         // set form values
-        form.todoForm.get('id').setValue(null);
-        form.todoForm.get('title').setValue(null);
+        component.todoForm.get('id').setValue(null);
+        component.todoForm.get('title').setValue(null);
 
         // expect
-        expect(form.todoForm.valid).toBeFalsy();
+        expect(component.todoForm.valid).toBeFalsy();
     });
 
     it('should have form valid', () => {
-        const fixture = TestBed.createComponent(FormComponent);
-        const form = fixture.componentInstance;
-
         // set form values
-        form.todoForm.get('id').setValue(1);
-        form.todoForm.get('title').setValue('Hello World');
+        component.todoForm.get('id').setValue(1);
+        component.todoForm.get('title').setValue('Hello World');
 
         // expect
-        expect(form.todoForm.valid).toBeTruthy();
+        expect(component.todoForm.valid).toBeTruthy();
     });
 });

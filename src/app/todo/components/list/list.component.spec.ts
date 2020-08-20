@@ -1,5 +1,5 @@
 // angular
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
@@ -8,10 +8,13 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { TodoState } from 'src/app/todo/store/states/todo.state';
 import { GetTodos } from 'src/app/todo/store/actions/todo.action';
 import { TodoService } from 'src/app/todo/services/todo.service';
+import { ListComponent } from './list.component';
 
 describe('List Component', () => {
 	let todoService: TodoService
 	let store: Store;
+	let component: ListComponent;
+	let fixture: ComponentFixture<ListComponent>;
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
@@ -20,6 +23,9 @@ describe('List Component', () => {
 				NgxsModule.forRoot([
 					TodoState
 				])
+			],
+			declarations: [
+				ListComponent
 			]
 		}).compileComponents();
 	});
@@ -41,6 +47,17 @@ describe('List Component', () => {
 
 		// inject store
 		store = TestBed.inject(Store);
+	});
+
+	beforeEach(() => {
+		fixture = TestBed.createComponent(ListComponent);
+		component = fixture.componentInstance;
+
+		fixture.detectChanges();
+	});
+
+	it('should have List Component', () => {
+		expect(component).toBeDefined();
 	});
 
 	it('should have todos list', () => {

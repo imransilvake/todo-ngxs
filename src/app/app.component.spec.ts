@@ -11,7 +11,7 @@ import { FormComponent } from './todo/components/form/form.component';
 import { ListComponent } from './todo/components/list/list.component';
 
 describe('AppComponent', () => {
-	let comp: AppComponent;
+	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
 	let elements: HTMLElement;
 
@@ -34,18 +34,18 @@ describe('AppComponent', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
-		comp = fixture.componentInstance;
+		component = fixture.componentInstance;
 		elements = fixture.nativeElement;
 
 		fixture.detectChanges();
 	});
 
 	it('should create the app', () => {
-		expect(comp).toBeTruthy();
+		expect(component).toBeDefined();
 	});
 
 	it(`should have as title 'Todo App using NGXS'`, () => {
-		expect(comp.title).toEqual('Todo App using NGXS');
+		expect(component.title).toEqual('Todo App using NGXS');
 	});
 
 	it('should contain a text: NGXS', () => {
