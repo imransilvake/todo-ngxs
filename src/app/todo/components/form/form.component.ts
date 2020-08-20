@@ -50,7 +50,9 @@ export class FormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-
+		// remove subscriptions
+		this._unSubscribe.next();
+		this._unSubscribe.complete();
 	}
 
 	/**
