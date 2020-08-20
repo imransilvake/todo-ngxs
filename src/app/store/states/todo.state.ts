@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { Todo } from '../models/Todo.model';
 import { GetTodos, AddTodo, UpdateTodo, DeleteTodo, SetSelectedTodo } from '../actions/todo.action';
-import { TodoService } from './../../todo.service';
+import { TodoService } from '../../services/todo.service';
 
 // State Model
 export class TodoStateModel {

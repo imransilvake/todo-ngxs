@@ -1,7 +1,6 @@
 // angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -23,10 +22,8 @@ export class FormComponent implements OnInit {
 	public editTodo = false;
 
 	constructor(
-		private fb: FormBuilder,
-		private store: Store,
-		private route: ActivatedRoute,
-		private router: Router
+		private _fb: FormBuilder,
+		private _store: Store
 	) {
 		// create form
 		this.createForm();
@@ -39,7 +36,6 @@ export class FormComponent implements OnInit {
 				if (todo) {
 					this.todoForm.patchValue({
 						id: todo.id,
-						userId: todo.userId,
 						title: todo.title
 					});
 					this.editTodo = true;
@@ -53,9 +49,8 @@ export class FormComponent implements OnInit {
 	 * create form
 	 */
 	createForm() {
-		this.todoForm = this.fb.group({
-			id: [''],
-			userId: ['', Validators.required],
+		this.todoForm = this._fb.group({
+			id: [0],
 			title: ['', Validators.required]
 		});
 	}
@@ -63,13 +58,13 @@ export class FormComponent implements OnInit {
 	/**
 	 * sumbit form
 	 */
-	onSubmit() {
+	onSubmit() {		
 		if (this.editTodo) {
-			this.store
+			this._store
 				.dispatch(new UpdateTodo(this.todoForm.value, this.todoForm.value.id))
 				.subscribe(() => this.clearForm());
 		} else {
-			this.store
+			this._store
 				.dispatch(new AddTodo(this.todoForm.value))
 				.subscribe(() => this.clearForm());
 		}
@@ -83,6 +78,6 @@ export class FormComponent implements OnInit {
 		this.todoForm.reset();
 
 		// reset state property
-		this.store.dispatch(new SetSelectedTodo(null));
+		this._store.dispatch(new SetSelectedTodo(null));
 	}
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // app
-import { Todo } from './store/models/Todo.model';
+import { Todo } from '../store/models/Todo.model';
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
@@ -31,8 +31,7 @@ export class TodoService {
 	 * @param id 
 	 */
 	updateTodo(payload: Todo, id: number) {
-		console.log(id);
-		return this.http.put<Todo>(`https://jsonplaceholder.typicode.com/todos/${id}`, payload);
+		return this.http.patch<Todo>(`https://jsonplaceholder.typicode.com/todos/${id}`, payload);
 	}
 
 	/**
