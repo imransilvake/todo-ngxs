@@ -27,14 +27,17 @@ describe('List Component', () => {
 	beforeEach(() => {
 		// spy fetchTodos from TodoService to get mock data
 		todoService = TestBed.inject(TodoService);
-		spyOn(todoService, 'fetchTodos').and.returnValue(of(
-			[
-				{ id: 1, title: 'One' },
-				{ id: 2, title: 'Two' },
-				{ id: 3, title: 'Three' },
-				{ id: 4, title: 'Four' }
-			]
-		));
+		spyOn(todoService, 'fetchTodos')
+			.and.returnValue(
+				of(
+					[
+						{ id: 1, title: 'One' },
+						{ id: 2, title: 'Two' },
+						{ id: 3, title: 'Three' },
+						{ id: 4, title: 'Four' }
+					]
+				)
+			);
 
 		// inject store
 		store = TestBed.inject(Store);

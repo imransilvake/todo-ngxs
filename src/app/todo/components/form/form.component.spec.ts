@@ -27,6 +27,7 @@ describe('Form Component', () => {
     it('should have form invalid', () => {
         const fixture = TestBed.createComponent(FormComponent);
         const form = fixture.componentInstance;
+        fixture.detectChanges();
 
         // set form values
         form.todoForm.get('id').setValue(null);
