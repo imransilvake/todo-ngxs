@@ -1,4 +1,4 @@
-import { Todo } from "../models/Todo.model";
+import { Todo } from "../models/todo.model";
 
 // add a todo
 export class AddTodo {

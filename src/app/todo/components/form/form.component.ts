@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
-import { Todo } from 'src/app/todo/store/models/Todo.model';
+import { Todo } from 'src/app/todo/store/models/todo.model';
 import { TodoState } from 'src/app/todo/store/states/todo.state';
 import { UpdateTodo, AddTodo, SetSelectedTodo } from 'src/app/todo/store/actions/todo.action';
 
