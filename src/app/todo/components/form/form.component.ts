@@ -5,9 +5,9 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 // app
-import { Todo } from 'src/app/store/models/Todo.model';
-import { TodoState } from 'src/app/store/states/todo.state';
-import { UpdateTodo, AddTodo, SetSelectedTodo } from 'src/app/store/actions/todo.action';
+import { Todo } from 'src/app/todo/store/models/Todo.model';
+import { TodoState } from 'src/app/todo/store/states/todo.state';
+import { UpdateTodo, AddTodo, SetSelectedTodo } from 'src/app/todo/store/actions/todo.action';
 
 @Component({
 	selector: 'app-form',

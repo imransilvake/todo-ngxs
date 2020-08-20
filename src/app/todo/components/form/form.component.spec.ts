@@ -1,22 +1,17 @@
 // angular
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 // app
 import { NgxsModule } from '@ngxs/store';
+import { TodoState } from 'src/app/todo/store/states/todo.state';
 import { FormComponent } from './form.component';
-import { TodoState } from 'src/app/store/states/todo.state';
 
 describe('Form Component', () => {
     beforeEach(async() => {
         TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule,
-                BrowserModule,
-                FormsModule,
                 ReactiveFormsModule,
                 HttpClientTestingModule,
                 NgxsModule.forRoot([
@@ -35,7 +30,6 @@ describe('Form Component', () => {
 
         // set form values
         form.todoForm.get('id').setValue('');
-        form.todoForm.get('userId').setValue('');
         form.todoForm.get('title').setValue('');
 
         // expect
@@ -48,7 +42,6 @@ describe('Form Component', () => {
 
         // set form values
         form.todoForm.get('id').setValue('1');
-        form.todoForm.get('userId').setValue('212');
         form.todoForm.get('title').setValue('Hello World');
 
         // expect
