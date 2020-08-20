@@ -21,10 +21,12 @@ export class ListComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// get todos
 		this.store.dispatch(new GetTodos());
 	}
 
 	ngOnDestroy() {
+		// rest selected todo
 		this.store.dispatch(new SetSelectedTodo(null));
 	}
 

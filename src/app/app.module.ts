@@ -1,11 +1,9 @@
 // angular
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 // app
 import { NgxsModule } from '@ngxs/store';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,16 +16,16 @@ import { TodoModule } from './todo/todo.module';
     ],
     imports: [
         // core
-		BrowserModule,
-		HttpClientModule,
+        HttpClientModule,
+
+        // NGXS
         NgxsModule.forRoot([
             TodoState
         ]),
         NgxsReduxDevtoolsPluginModule.forRoot(),
-        NgxsLoggerPluginModule.forRoot(),
-        AppRoutingModule,
 
         // app
+        AppRoutingModule,
         TodoModule
     ],
     bootstrap: [AppComponent]

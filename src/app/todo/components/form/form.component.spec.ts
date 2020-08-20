@@ -29,8 +29,8 @@ describe('Form Component', () => {
         const form = fixture.componentInstance;
 
         // set form values
-        form.todoForm.get('id').setValue('');
-        form.todoForm.get('title').setValue('');
+        form.todoForm.get('id').setValue(null);
+        form.todoForm.get('title').setValue(null);
 
         // expect
         expect(form.todoForm.valid).toBeFalsy();
@@ -41,7 +41,7 @@ describe('Form Component', () => {
         const form = fixture.componentInstance;
 
         // set form values
-        form.todoForm.get('id').setValue('1');
+        form.todoForm.get('id').setValue(1);
         form.todoForm.get('title').setValue('Hello World');
 
         // expect

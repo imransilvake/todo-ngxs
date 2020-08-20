@@ -1,8 +1,9 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { Todo } from 'src/app/todo/store/models/Todo.model';
@@ -15,11 +16,13 @@ import { UpdateTodo, AddTodo, SetSelectedTodo } from 'src/app/todo/store/actions
 	styleUrls: ['./form.component.scss']
 })
 
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
 	@Select(TodoState.getSelectedTodo) selectedTodo: Observable<Todo>;
 
 	public todoForm: FormGroup;
 	public editTodo = false;
+
+	private _unSubscribe = new Subject();
 
 	constructor(
 		private _fb: FormBuilder,
@@ -32,6 +35,7 @@ export class FormComponent implements OnInit {
 	ngOnInit() {
 		// listener: selectedTodo from TodoState
 		this.selectedTodo
+			.pipe(takeUntil(this._unSubscribe))
 			.subscribe(todo => {
 				if (todo) {
 					this.todoForm.patchValue({
@@ -43,6 +47,10 @@ export class FormComponent implements OnInit {
 					this.editTodo = false;
 				}
 			});
+	}
+
+	ngOnDestroy() {
+
 	}
 
 	/**
@@ -62,10 +70,12 @@ export class FormComponent implements OnInit {
 		if (this.editTodo) {
 			this._store
 				.dispatch(new UpdateTodo(this.todoForm.value, this.todoForm.value.id))
+				.pipe(takeUntil(this._unSubscribe))
 				.subscribe(() => this.clearForm());
 		} else {
 			this._store
 				.dispatch(new AddTodo(this.todoForm.value))
+				.pipe(takeUntil(this._unSubscribe))
 				.subscribe(() => this.clearForm());
 		}
 	}
