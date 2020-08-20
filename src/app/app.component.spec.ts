@@ -2,6 +2,8 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 // app
 import { NgxsModule } from '@ngxs/store';
@@ -13,14 +15,15 @@ import { ListComponent } from './todo/components/list/list.component';
 describe('AppComponent', () => {
 	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
-	let elements: HTMLElement;
+	let nativeElement: HTMLElement;
+	let debugElement: DebugElement;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			imports: [
 				ReactiveFormsModule,
 				HttpClientTestingModule,
-                NgxsModule.forRoot([
+				NgxsModule.forRoot([
 					TodoState
 				])
 			],
@@ -35,7 +38,8 @@ describe('AppComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
-		elements = fixture.nativeElement;
+		nativeElement = fixture.nativeElement;
+		debugElement = fixture.debugElement;
 
 		fixture.detectChanges();
 	});
@@ -48,7 +52,13 @@ describe('AppComponent', () => {
 		expect(component.title).toEqual('Todo App using NGXS');
 	});
 
-	it('should contain a text: NGXS', () => {
-		expect(elements.querySelector('.container h1').textContent).toContain('NGXS');
+	it('should contain a text: "NGXS" using querySelector', () => {
+		const titleText = nativeElement.querySelector('.container h1').textContent;
+		expect(titleText).toContain('NGXS');
+	});
+
+	it('should contain a text: "NGXS" using By.css', () => {
+		const titleText = debugElement.query(By.css('.container h1')).nativeElement.textContent;
+		expect(titleText).toContain('NGXS');
 	});
 });

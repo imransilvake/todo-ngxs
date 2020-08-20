@@ -60,6 +60,10 @@ describe('List Component', () => {
 		expect(component).toBeDefined();
 	});
 
+	it('should have been called "fetchTodos"', () => {
+		expect(todoService.fetchTodos).toHaveBeenCalled();
+	});
+
 	it('should have todos list', () => {
 		store.dispatch(new GetTodos());
 		const todos = store.selectSnapshot(state => state.TodoState.todos);
