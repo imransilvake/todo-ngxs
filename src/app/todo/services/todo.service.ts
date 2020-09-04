@@ -14,7 +14,7 @@ export class TodoService {
 	 * fetch todos
 	 */
 	fetchTodos() {
-		return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
+		return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=10');
 	}
 
 	/**
