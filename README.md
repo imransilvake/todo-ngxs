@@ -1,5 +1,5 @@
 # Todo
-A simple todo CRUD app using angular state management library NGXS. [JsonPlaceHolder](https://jsonplaceholder.typicode.com/guide.html) is used to fetch the todo list.
+A simple todo CRUD app using Angular with NGXS State Management Library. [JsonPlaceHolder](https://jsonplaceholder.typicode.com/guide.html) is used to fetch the todo list.
 
 
 ## Content
